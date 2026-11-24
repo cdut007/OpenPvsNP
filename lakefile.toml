@@ -1,6 +1,7 @@
 name = "openpvsnp"
 version = "0.1.0"
 defaultTargets = ["OpenPvsNP"]
+srcDir = "formal"
 
 [[lean_lib]]
 name = "OpenPvsNP"
