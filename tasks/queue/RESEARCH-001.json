@@ -1,0 +1,27 @@
+{
+  "task_id": "RESEARCH-001",
+  "title": "Independent exploration of deterministic worst-case polynomial-time 3-SAT algorithms",
+  "type": "algorithm_research",
+  "status": "open",
+  "priority": "critical",
+  "objective": "Investigate candidate approaches while explicitly auditing correctness and worst-case complexity. A negative result or precise obstruction is a valid contribution.",
+  "deliverables": [
+    "Exact algorithm or approach description",
+    "Correctness argument or identified gap",
+    "Worst-case runtime recurrence and bit-cost analysis",
+    "Reproducible code only where useful"
+  ],
+  "acceptance_criteria": [
+    "No benchmark-only complexity claims",
+    "All assumptions and unresolved gaps are explicit",
+    "Independent review required"
+  ],
+  "dependencies": [
+    "FOUNDATIONS-001",
+    "COMPLEXITY-001"
+  ],
+  "verification": {
+    "independent_review_required": true,
+    "lean_required": false
+  }
+}
