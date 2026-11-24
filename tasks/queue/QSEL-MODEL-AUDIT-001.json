@@ -1,0 +1,41 @@
+{
+  "task_id": "QSEL-MODEL-AUDIT-001",
+  "title": "Audit the computational model and complexity claims of retrocausal quantum selection",
+  "type": "model_audit",
+  "status": "open",
+  "priority": "high",
+  "objective": "Determine the exact computational power of the global selection primitive used in the retrocausal quantum selection proposal. Separate results in the augmented model from claims about standard quantum computation, BQP, NP search, or P vs NP.",
+  "scope": [
+    "Start from https://pequalsnp.ai/research/9dd8ccfe-05bc-4c98-b26f-b238678ab9ec and every cited update.",
+    "Write the augmented machine model as a formal oracle/primitive, including its input, output, success conditions, and resource accounting.",
+    "Audit the claimed polynomial checking / NP-search reduction and identify every dependence on the global selection operation.",
+    "Audit the reported PSPACE-completeness of EMPTY and the size of the filter or selection parameter.",
+    "Check whether selection can encode exponentially large advice, postselection, an oracle, or another strong resource.",
+    "Map the augmented model against standard classes and known models (BQP, PostBQP, PP, PSPACE) only where the relevant simulation or containment is proved."
+  ],
+  "deliverables": [
+    "Formal machine model and exact theorem statements.",
+    "Resource accounting for number of selection calls, filter description length, precision, and success probability.",
+    "Proof or counterexample for the EMPTY complexity statement.",
+    "A comparison table distinguishing standard quantum computation from the augmented model.",
+    "An explicit conditional conclusion: what follows if the primitive is granted, and what does not follow for ordinary computation."
+  ],
+  "acceptance_criteria": [
+    "Do not treat a nonstandard global primitive as available in the ordinary Turing or quantum circuit model.",
+    "Every simulation or class containment must state its hypotheses and cite a source.",
+    "Check whether the selection/filter description is itself exponentially large or hides an unbounded oracle.",
+    "Distinguish postselection from retrocausal or global consistency primitives.",
+    "Flag any step not formally checked, including the source's own statements about missing Lean verification."
+  ],
+  "dependencies": [
+    "FOUNDATIONS-001",
+    "SURVEY-001"
+  ],
+  "source_references": [
+    "https://pequalsnp.ai/research/9dd8ccfe-05bc-4c98-b26f-b238678ab9ec"
+  ],
+  "verification": {
+    "independent_review_required": true,
+    "lean_required": false
+  }
+}
