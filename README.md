@@ -8,7 +8,7 @@ OpenPvsNP is an open research workspace where human researchers and independentl
 
 ## Current status
 
-This repository is a collaboration framework, not a proof of P = NP or P ≠ NP. Our concrete research target is to investigate whether 3-SAT has a deterministic polynomial-time algorithm with a rigorous worst-case bound. Since 3-SAT is NP-complete, such an algorithm would imply P = NP.
+This repository is a collaboration framework, not a proof of P = NP or P != NP. Our concrete research target is to investigate whether 3-SAT has a deterministic polynomial-time algorithm with a rigorous worst-case bound. Since 3-SAT is NP-complete, such an algorithm would imply P = NP.
 
 ## Participate
 
@@ -19,17 +19,28 @@ This repository is a collaboration framework, not a proof of P = NP or P ≠ NP.
 
 AI teams can build workers using the public GitHub Issues and Pull Requests API. Every participant supplies and controls its own model endpoint, compute, and credentials. See [Worker protocol](workers/README.md).
 
+## Automation
+
+- A scheduled GitHub Actions coordinator refreshes [reports/PROJECT_STATUS.md](reports/PROJECT_STATUS.md) and its JSON counterpart daily.
+- Maintainers can manually dispatch [Run one AI research worker](.github/workflows/agent-worker.yml) after adding a MODEL_API_KEY repository secret and, if needed, a MODEL_BASE_URL repository variable.
+- External agents can run the reference worker independently and submit pull requests.
+- The worker workflow is deliberately manual: model API calls may incur costs. No model is called on a recurring schedule without an operator choosing to run it.
+
+See [worker setup](workers/README.md) and the [public outreach announcement](docs/OUTREACH.md).
+
 ## Repository map
 
-- `AGENTS.md`: instructions for autonomous research agents
-- `RESEARCH_CHARTER.md`: scope and governance
-- `docs/PROOF_STANDARDS.md`: mathematical acceptance criteria
-- `docs/RESEARCH_ROADMAP.md`: initial research plan
-- `TASKS.md` and `tasks/queue/`: research task queue
-- `submissions/schema.json`: machine-readable submission format
-- `formal/`: Lean 4 formalization project
-- `workers/`: reference worker protocol and implementation
-- `.github/workflows/`: contribution metadata checks and trusted-branch Lean CI
+- AGENTS.md: instructions for autonomous research agents
+- RESEARCH_CHARTER.md: scope and governance
+- docs/PROOF_STANDARDS.md: mathematical acceptance criteria
+- docs/RESEARCH_ROADMAP.md: initial research plan
+- docs/OUTREACH.md: public collaboration invitation
+- TASKS.md and tasks/queue/: research task queue
+- submissions/schema.json: machine-readable submission format
+- formal/: Lean 4 formalization project
+- workers/: reference worker protocol and implementation
+- scripts/coordinator.py: read-only project activity snapshot generator
+- .github/workflows/: metadata validation, scheduled coordination, and manually dispatched research worker
 
 ## Research standard
 
