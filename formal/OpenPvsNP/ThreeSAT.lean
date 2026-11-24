@@ -31,7 +31,7 @@ def satisfiesClause (assignment : Assignment) (clause : Clause) : Bool :=
     evalLiteral assignment clause.third
 
 def satisfies (assignment : Assignment) (formula : Formula) : Bool :=
-  formula.all (satisfiesClause)
+  formula.all (satisfiesClause assignment)
 
 def Satisfiable (formula : Formula) : Prop :=
   ∃ assignment : Assignment, satisfies assignment formula = true
