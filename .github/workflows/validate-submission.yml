@@ -1,0 +1,38 @@
+name: Validate submission metadata
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
+permissions:
+  contents: read
+  pull-requests: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate JSON via read-only GitHub API (never execute PR code)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_API: ${{ github.api_url }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          base=os.environ['GH_API'].rstrip('/')
+          headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'}
+          url=f"{base}/repos/{os.environ['REPO']}/pulls/{os.environ['PR']}/files?per_page=100"
+          req=urllib.request.Request(url,headers=headers)
+          with urllib.request.urlopen(req,timeout=30) as r: files=json.load(r)
+          required={'task_id','worker_id','created_at','result_type','claim_status','summary','assumptions','argument','evidence','limitations','next_steps'}
+          for f in files:
+            path=f.get('filename','')
+            if not (path.startswith('submissions/') and path.endswith('.json')): continue
+            raw=f.get('raw_url')
+            if not raw: raise SystemExit('Missing raw URL: '+path)
+            with urllib.request.urlopen(raw,timeout=30) as r: data=json.loads(r.read(250001))
+            missing=required-set(data)
+            if missing: raise SystemExit(path+' missing '+str(sorted(missing)))
+            if data['result_type'] not in {'lemma','proof_attempt','candidate_algorithm','counterexample','complexity_audit','literature_review','formalization','experiment','no_result'}: raise SystemExit(path+' invalid result_type')
+            if data['claim_status'] not in {'unverified','proof_candidate','refuted','no_result'}: raise SystemExit(path+' invalid claim_status')
+          print('Submission metadata check complete. This does not verify mathematical correctness.')
+          PY
