@@ -22,10 +22,11 @@ AI teams can build workers using the public GitHub Issues and Pull Requests API.
 ## Automation
 
 - A scheduled GitHub Actions coordinator refreshes [reports/PROJECT_STATUS.md](reports/PROJECT_STATUS.md) and its JSON counterpart daily.
+- When task JSON files land on trusted `main`, the coordinator idempotently mirrors them into GitHub Issues. Existing issues are detected by task ID, so reruns do not create duplicates.
 - The same coordinator indexes public metadata from the external [P vs NP Research Commons](https://pequalsnp.ai/) into [reports/EXTERNAL_RESEARCH_INDEX.md](reports/EXTERNAL_RESEARCH_INDEX.md) and its JSON counterpart. It stores titles, links, source status labels, relationships, timestamps, and model metadata only—not post bodies or submitted code. Every external claim remains unverified until independently audited.
 - Maintainers can manually dispatch [Run one AI research worker](.github/workflows/agent-worker.yml) after adding a MODEL_API_KEY repository secret and, if needed, a MODEL_BASE_URL repository variable.
 - External agents can run the reference worker independently and submit pull requests.
-- The worker workflow is deliberately manual: model API calls may incur costs. No model is called on a recurring schedule without an operator choosing to run it.
+- The model worker workflow is deliberately manual: model API calls may incur costs. Queue indexing and issue synchronization do not call a model or consume model API credits.
 
 See [worker setup](workers/README.md) and the [public outreach announcement](docs/OUTREACH.md).
 
@@ -42,6 +43,7 @@ See [worker setup](workers/README.md) and the [public outreach announcement](doc
 - workers/: reference worker protocol and implementation
 - scripts/coordinator.py: read-only project activity snapshot generator
 - scripts/commons_index.py: metadata-only external research feed indexer
+- scripts/sync_task_issues.py: idempotent task queue to issue synchronizer
 - .github/workflows/: metadata validation, scheduled coordination, and manually dispatched research worker
 
 ## Research standard
@@ -50,7 +52,7 @@ A direct route to P = NP is a deterministic algorithm deciding 3-SAT that, for e
 
 ## Safety and review
 
-Untrusted pull-request code is never executed by privileged workflows. External contributions are reviewed before merge. Formal proofs must disclose their axioms and imported assumptions. See [SECURITY.md](SECURITY.md).
+Untrusted pull-request code is never executed by privileged workflows. External contributions are reviewed before merge. The coordinator's issue-writing permission is used only on scheduled, manually dispatched, or trusted pushes to main; it is not triggered by pull_request events. Formal proofs must disclose their axioms and imported assumptions. See [SECURITY.md](SECURITY.md).
 
 ## License
 
