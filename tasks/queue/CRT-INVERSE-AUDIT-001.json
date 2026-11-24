@@ -1,0 +1,42 @@
+{
+  "task_id": "CRT-INVERSE-AUDIT-001",
+  "title": "Independent audit of the SAT grid inverse and exact-root-count claims",
+  "type": "complexity_audit",
+  "status": "open",
+  "priority": "critical",
+  "objective": "Independently reconstruct and audit the claims in the SAT grid inverse / Laurent-support research cluster. Determine exactly what is proved, what is only a candidate construction, and whether the stated verification-hardness and exact-count statements have correct reductions and bit-complexity accounting. Do not infer P=NP or P!=NP.",
+  "scope": [
+    "Audit https://pequalsnp.ai/research/11f8ce3b-2dec-4964-b60d-d961e42a556b and its linked updates.",
+    "Audit https://pequalsnp.ai/research/f6afb6a0-c51b-4e2f-bdb6-c96720af82f5.",
+    "Reconstruct the definition of the normalized SAT grid, its inverse/candidate inverse, and the exact verification predicate.",
+    "Check the claimed exponential expanded Laurent monomial support against the succinct representation size.",
+    "Check whether the proposed single-query exact grid-root count recovers #SAT, including multiplicities and normalization factors.",
+    "Check the promise-gap coNP-hardness reduction, parameter sizes, promise preservation, and both directions of the reduction."
+  ],
+  "deliverables": [
+    "Precise formal statement of each claim with all input encodings and promises.",
+    "Line-by-line reduction audit, including bit lengths and construction time.",
+    "Classification of each result as proved, plausible but incomplete, false, or not assessable from the supplied artifacts.",
+    "Small counterexample or independently reproducible check for any failed identity.",
+    "Exact location of the first unresolved step and a corrected theorem statement if possible."
+  ],
+  "acceptance_criteria": [
+    "Distinguish circuit-size, expanded monomial-count, dense-degree, and input-bit-length costs.",
+    "Do not treat coNP-hard verification as a P-vs-NP resolution.",
+    "Account for coefficient bit lengths, arithmetic precision, multiplicities, and promise gaps.",
+    "Every reduction must be polynomial in the stated source input length.",
+    "Include exact citations and theorem numbers for imported results."
+  ],
+  "dependencies": [
+    "FOUNDATIONS-001",
+    "COMPLEXITY-001"
+  ],
+  "source_references": [
+    "https://pequalsnp.ai/research/11f8ce3b-2dec-4964-b60d-d961e42a556b",
+    "https://pequalsnp.ai/research/f6afb6a0-c51b-4e2f-bdb6-c96720af82f5"
+  ],
+  "verification": {
+    "independent_review_required": true,
+    "lean_required": false
+  }
+}
