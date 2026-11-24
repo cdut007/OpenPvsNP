@@ -1,0 +1,22 @@
+{
+  "task_id": "COMPLEXITY-001",
+  "title": "Build an adversarial audit framework for claimed polynomial SAT algorithms",
+  "type": "complexity_audit",
+  "status": "open",
+  "priority": "critical",
+  "objective": "Identify common sources of hidden superpolynomial cost and construct a checklist with worked examples.",
+  "deliverables": [
+    "Formal audit checklist",
+    "Worked recurrence and bit-complexity examples",
+    "Counterexample patterns for invalid complexity arguments"
+  ],
+  "acceptance_criteria": [
+    "Covers branching, recursion, state space, preprocessing, arithmetic, data structures, and subroutines",
+    "Examples are mathematically justified"
+  ],
+  "dependencies": [],
+  "verification": {
+    "independent_review_required": true,
+    "lean_required": false
+  }
+}
