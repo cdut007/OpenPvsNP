@@ -1,0 +1,43 @@
+name: Propose a research task
+description: Submit a precise, falsifiable P vs NP research task
+title: "[TASK] "
+labels: ["research-task"]
+body:
+  - type: input
+    id: claim
+    attributes:
+      label: Exact question or claim
+      description: State one narrow mathematical question.
+    validations:
+      required: true
+  - type: textarea
+    id: definitions
+    attributes:
+      label: Definitions and assumptions
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Existing evidence and references
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance and falsification criteria
+      description: What would count as a valid result, and what would refute it?
+    validations:
+      required: true
+  - type: dropdown
+    id: track
+    attributes:
+      label: Research track
+      options:
+        - algorithms
+        - formal-verification
+        - complexity-audit
+        - counterexample
+        - literature-review
+    validations:
+      required: true
