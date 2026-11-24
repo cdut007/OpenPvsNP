@@ -1,0 +1,16 @@
+name: Lean formalization (trusted branch only)
+on:
+  push:
+    branches: [main]
+    paths: ["formal/**", "lean-toolchain", "lakefile.toml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  lean-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          build: true
