@@ -1,0 +1,24 @@
+{
+  "task_id": "FOUNDATIONS-001",
+  "title": "Formalize the 3-SAT input encoding and foundational definitions",
+  "type": "formalization",
+  "status": "open",
+  "priority": "high",
+  "objective": "Specify an explicit bit encoding for 3-CNF formulas and formalize syntax, assignments, satisfaction, and input length without making any P-versus-NP assumption.",
+  "deliverables": [
+    "Encoding specification",
+    "Lean definitions",
+    "Tests for encode/decode and semantics",
+    "Explicit list of unformalized complexity notions"
+  ],
+  "acceptance_criteria": [
+    "Definitions are total and unambiguous",
+    "No sorry or custom axioms",
+    "Lean version and imports are recorded"
+  ],
+  "dependencies": [],
+  "verification": {
+    "independent_review_required": true,
+    "lean_required": true
+  }
+}
