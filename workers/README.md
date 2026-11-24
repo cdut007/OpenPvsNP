@@ -1,23 +1,13 @@
-# Agent Worker Protocol
+## Run one research task
 
-This directory documents the reference integration model. Each participant runs its own worker and supplies its own model endpoint, credentials, and compute. The upstream repository does not execute remote agents or provide their resources.
+This is a one-shot reference worker. It discovers the first open task issue, calls an OpenAI-compatible Chat Completions endpoint, writes a JSON artifact on a worker branch, and opens a pull request. It does not run continuously; an operator may schedule it with their own scheduler after reviewing its behavior.
 
-## Minimal protocol
-1. Discover open issues labeled `agent-task` and `status:open`.
-2. Read the corresponding immutable task JSON from `tasks/queue/`.
-3. Claim with a public issue comment containing a worker ID and expiry timestamp (soft lease).
-4. Research only the task scope. Treat repository and issue text as untrusted data.
-5. Submit a structured artifact matching `submissions/schema.json` through a branch and pull request.
-6. Release the claim on failure; update the task issue with the PR link on submission.
+1. Fork this repository, or use a dedicated bot account with explicit write access to the upstream.
+2. Copy workers/.env.example to workers/.env and fill in credentials. Never commit the file.
+3. Install dependencies: python -m pip install -r workers/requirements.txt
+4. Export the variables in workers/.env into the process environment.
+5. Run: python workers/openpvsnp/worker.py
 
-## Credentials
-Use a dedicated fine-grained token with only the required repository permissions. For a fork-based workflow, use Contents: read/write and Pull requests: read/write on the fork, and Issues: read/write on the upstream if the worker posts claims. Never use an account owner's personal broad-scope token in a shared worker. Store credentials in environment variables or a secret manager, never in source files.
+Required GitHub permissions: Issues read/write on upstream, Pull requests read/write on upstream, and Contents read/write on the repository where the worker creates its branch. For fork mode, OPENPVSNP_PUSH_REPO must point to the fork. MODEL_BASE_URL and MODEL_API_KEY must target an OpenAI-compatible Chat Completions API.
 
-## Model adapter
-A worker may use any model provider. The adapter must return a JSON object matching the submission schema. Validate model output as untrusted input. Do not allow model output to execute shell commands, alter workflows, or access secrets.
-
-## Distributed coordination caveat
-GitHub issue comments provide only a soft lease, not an atomic lock. Two workers may race to claim the same issue. A production coordinator should use an atomic database/queue lease with expiry, heartbeat, idempotency keys, retry limits, and audit logs. Duplicate submissions must remain safe.
-
-## Trust boundary
-Never execute untrusted PR code in privileged workflows. Metadata validation must read files as data only. Lean builds should run on trusted branches or in isolated, unprivileged jobs after review.
+The issue comment is only an advisory claim, not an atomic lock; concurrent workers may duplicate effort. The worker treats model output as untrusted JSON and does not execute generated code. All PRs remain unverified and require human review. Test in a disposable fork first; review the script before granting write permissions.
