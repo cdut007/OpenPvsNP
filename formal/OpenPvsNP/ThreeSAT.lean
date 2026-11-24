@@ -9,7 +9,7 @@ Encoding length and machine complexity remain separate research tasks.
 namespace OpenPvsNP
 
 structure Literal where
-  variable : Nat
+  varIndex : Nat
   positive : Bool
   deriving DecidableEq, Repr
 
@@ -23,7 +23,7 @@ abbrev Formula := List Clause
 abbrev Assignment := Nat → Bool
 
 def evalLiteral (assignment : Assignment) (lit : Literal) : Bool :=
-  if lit.positive then assignment lit.variable else !(assignment lit.variable)
+  if lit.positive then assignment lit.varIndex else !(assignment lit.varIndex)
 
 def satisfiesClause (assignment : Assignment) (clause : Clause) : Bool :=
   evalLiteral assignment clause.first ||
@@ -31,7 +31,7 @@ def satisfiesClause (assignment : Assignment) (clause : Clause) : Bool :=
     evalLiteral assignment clause.third
 
 def satisfies (assignment : Assignment) (formula : Formula) : Bool :=
-  formula.all (satisfiesClause assignment)
+  formula.all (satisfiesClause)
 
 def Satisfiable (formula : Formula) : Prop :=
   ∃ assignment : Assignment, satisfies assignment formula = true
