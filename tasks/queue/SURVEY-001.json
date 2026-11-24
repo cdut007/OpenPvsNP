@@ -1,0 +1,23 @@
+{
+  "task_id": "SURVEY-001",
+  "title": "Survey standard complexity definitions and established 3-SAT results",
+  "type": "literature_review",
+  "status": "open",
+  "priority": "high",
+  "objective": "Produce a source-backed survey of P, NP, polynomial-time many-one reductions, and 3-SAT NP-completeness.",
+  "deliverables": [
+    "Bibliography with stable identifiers",
+    "Exact theorem statements and hypotheses",
+    "Short explanation of the standard implication from 3-SAT in P to P=NP"
+  ],
+  "acceptance_criteria": [
+    "Every claim has a verifiable source",
+    "No unsupported novelty claims",
+    "Distinguish textbook facts from new results"
+  ],
+  "dependencies": [],
+  "verification": {
+    "independent_review_required": true,
+    "lean_required": false
+  }
+}
