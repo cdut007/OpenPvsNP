@@ -1,4 +1,4 @@
-import os, json, re, base64, uuid, requests
+import os, json, base64, uuid, requests
 from datetime import datetime, timezone
 UP=os.getenv('OPENPVSNP_UPSTREAM','cdut007/OpenPvsNP')
 PUSH=os.getenv('OPENPVSNP_PUSH_REPO',UP)
@@ -10,12 +10,11 @@ def gh(method,path,**kw):
  r=s.request(method,'https://api.github.com'+path,timeout=90,**kw); r.raise_for_status(); return r.json() if r.content else None
 def main():
  issues=gh('GET','/repos/'+UP+'/issues',params={'state':'open','per_page':100})
- issue=next((x for x in issues if 'pull_request' not in x and re.match(r'\\[(FOUNDATIONS|SURVEY|COMPLEXITY|RESEARCH)-\\d+\\]',x['title'])),None)
+ issue=next((x for x in issues if 'pull_request' not in x and x['title'].startswith('[') and ']' in x['title']),None)
  if not issue: print('No open research tasks'); return
- tid=re.match(r'\\[([A-Z0-9_-]+)\\]',issue['title']).group(1)
+ tid=issue['title'].split(']',1)[0][1:]
  item=gh('GET','/repos/'+UP+'/contents/tasks/queue/'+tid+'.json')
  task=json.loads(base64.b64decode(item['content']).decode())
- expiry=datetime.now(timezone.utc).isoformat()
  gh('POST','/repos/'+UP+'/issues/'+str(issue['number'])+'/comments',json={'body':'Worker '+W+' started a research run. Soft claim only; duplicate work may occur.'})
  sysmsg='Research this task rigorously. Audit worst-case complexity. Never claim P=NP without a complete proof. Return only JSON fields result_type, claim_status, summary, assumptions, argument, evidence, limitations, next_steps. Never invent citations.'
  response=requests.post(BASE+'/chat/completions',headers={'Authorization':'Bearer '+K},json={'model':MODEL,'temperature':0.2,'messages':[{'role':'system','content':sysmsg},{'role':'user','content':json.dumps(task)}]},timeout=900)
@@ -24,7 +23,7 @@ def main():
  result=json.loads(raw)
  required={'result_type','claim_status','summary','assumptions','argument','evidence','limitations','next_steps'}
  if not required.issubset(result): raise ValueError('Model response misses required fields')
- stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ'); slug=re.sub('[^A-Za-z0-9_-]','-',W)[:24]
+ stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ'); slug=''.join(c if c.isalnum() or c in '-_' else '-' for c in W)[:24]
  doc={'task_id':tid,'worker_id':W,'model':MODEL,'created_at':datetime.now(timezone.utc).isoformat(),**result}
  path='submissions/'+tid+'/'+slug+'-'+stamp+'.json'
  base=gh('GET','/repos/'+PUSH+'/git/ref/heads/main')['object']['sha']
