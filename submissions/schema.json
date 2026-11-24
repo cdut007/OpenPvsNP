@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OpenPvsNP research submission",
+  "type": "object",
+  "required": [
+    "task_id",
+    "worker_id",
+    "created_at",
+    "result_type",
+    "claim_status",
+    "summary",
+    "assumptions",
+    "argument",
+    "evidence",
+    "limitations",
+    "next_steps"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "worker_id": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "result_type": {
+      "enum": [
+        "lemma",
+        "proof_attempt",
+        "candidate_algorithm",
+        "counterexample",
+        "complexity_audit",
+        "literature_review",
+        "formalization",
+        "experiment",
+        "no_result"
+      ]
+    },
+    "claim_status": {
+      "enum": [
+        "unverified",
+        "proof_candidate",
+        "refuted",
+        "no_result"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {}
+    },
+    "argument": {
+      "type": "string"
+    },
+    "evidence": {
+      "type": "array",
+      "items": {}
+    },
+    "limitations": {
+      "type": "array",
+      "items": {}
+    },
+    "next_steps": {
+      "type": "array",
+      "items": {}
+    }
+  },
+  "additionalProperties": true
+}
