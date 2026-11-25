@@ -1,0 +1,85 @@
+{
+  "generated_at": "2026-11-25T11:13:51.590903+00:00",
+  "repository": "https://github.com/cdut007/OpenPvsNP",
+  "notice": "Activity metadata only. Issue/PR state, AI consensus, CI, and benchmarks do not verify mathematical correctness.",
+  "issues": {
+    "total": 6,
+    "by_state": {
+      "closed": 2,
+      "open": 4
+    },
+    "items": [
+      {
+        "number": 6,
+        "title": "[RESEARCH-001] Explore deterministic worst-case polynomial-time 3-SAT algorithms",
+        "state": "closed",
+        "url": "https://github.com/cdut007/OpenPvsNP/issues/6",
+        "updated_at": "2026-11-24T05:16:09Z"
+      },
+      {
+        "number": 5,
+        "title": "[COMPLEXITY-001] Audit hidden exponential costs in SAT algorithms",
+        "state": "closed",
+        "url": "https://github.com/cdut007/OpenPvsNP/issues/5",
+        "updated_at": "2026-11-24T05:16:06Z"
+      },
+      {
+        "number": 4,
+        "title": "[RESEARCH-001] Explore deterministic worst-case polynomial-time 3-SAT algorithms",
+        "state": "open",
+        "url": "https://github.com/cdut007/OpenPvsNP/issues/4",
+        "updated_at": "2026-11-24T05:12:31Z"
+      },
+      {
+        "number": 3,
+        "title": "[COMPLEXITY-001] Audit hidden exponential costs in SAT algorithms",
+        "state": "open",
+        "url": "https://github.com/cdut007/OpenPvsNP/issues/3",
+        "updated_at": "2026-11-24T05:12:29Z"
+      },
+      {
+        "number": 2,
+        "title": "[SURVEY-001] Survey standard complexity definitions and 3-SAT results",
+        "state": "open",
+        "url": "https://github.com/cdut007/OpenPvsNP/issues/2",
+        "updated_at": "2026-11-24T05:12:27Z"
+      },
+      {
+        "number": 1,
+        "title": "[FOUNDATIONS-001] Formalize 3-SAT encoding and definitions",
+        "state": "open",
+        "url": "https://github.com/cdut007/OpenPvsNP/issues/1",
+        "updated_at": "2026-11-24T05:12:25Z"
+      }
+    ]
+  },
+  "pull_requests": {
+    "total": 3,
+    "items": [
+      {
+        "number": 9,
+        "title": "Add prioritized independent research audit tasks",
+        "state": "open",
+        "draft": true,
+        "url": "https://github.com/cdut007/OpenPvsNP/pull/9",
+        "updated_at": "2026-11-24T05:52:27Z"
+      },
+      {
+        "number": 8,
+        "title": "Automate external research indexing and task issue sync",
+        "state": "open",
+        "draft": true,
+        "url": "https://github.com/cdut007/OpenPvsNP/pull/8",
+        "updated_at": "2026-11-24T05:56:54Z"
+      },
+      {
+        "number": 7,
+        "title": "Unblock Lean CI bootstrap and validate PRs",
+        "state": "open",
+        "draft": true,
+        "url": "https://github.com/cdut007/OpenPvsNP/pull/7",
+        "updated_at": "2026-11-24T05:54:57Z"
+      }
+    ]
+  }
+}
