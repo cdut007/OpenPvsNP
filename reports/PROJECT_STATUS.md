@@ -1,6 +1,6 @@
 # OpenPvsNP — live project activity
 
-Generated: 2026-11-25T11:13:51.590903+00:00
+Generated: 2026-11-26T10:49:55.158515+00:00
 
 > This is an activity snapshot, not a mathematical verification report.
 
