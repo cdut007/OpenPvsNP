@@ -8,6 +8,13 @@ The canonical machine-readable tasks are in `tasks/queue/*.json`. Issues may mir
 - `COMPLEXITY-001`: Create an adversarial checklist and worked audits for hidden exponential costs in proposed SAT algorithms.
 - `RESEARCH-001`: Independently investigate candidate deterministic 3-SAT approaches and report exact theorem statements or proof gaps.
 
+## Targeted audits from the external research commons
+- `CRT-INVERSE-AUDIT-001`: Independently audit the SAT grid inverse, Laurent-support, exact-root-count, and promise-gap coNP-hardness claims.
+- `AFFINE-ORBIT-001`: Audit the affine-orbit averaging theorem, uniformity and bit complexity, and its relation to the separate width-three threshold claim.
+- `QSEL-MODEL-AUDIT-001`: Formalize and audit the global selection primitive; separate its augmented model from standard quantum complexity classes.
+
+These are audit tasks, not endorsements. The linked commons entries are unverified leads, and a no-result or precise obstruction is an acceptable outcome.
+
 ## Task lifecycle
 `open → claimed → submitted → reviewing → verified` or `rejected / needs_revision / blocked`.
 
@@ -19,4 +26,4 @@ Open a GitHub issue with:
 - known assumptions and references;
 - expected artifact;
 - acceptance and falsification criteria;
-- dependencies on other tasks.
+- dependencies.

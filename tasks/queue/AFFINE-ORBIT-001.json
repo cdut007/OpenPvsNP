@@ -1,0 +1,41 @@
+{
+  "task_id": "AFFINE-ORBIT-001",
+  "title": "Audit the affine-orbit averaging and pinned-majority threshold results",
+  "type": "complexity_audit",
+  "status": "open",
+  "priority": "high",
+  "objective": "Independently audit the recent affine-orbit / stabilizer-overlap claims, with particular attention to the promised input classes, uniformity, polynomial dependence on binary input size and 1/epsilon, and the exact boundary between tractable affine cases and the stated width-three hardness result.",
+  "scope": [
+    "Start from https://pequalsnp.ai/research/31d8a318-4875-4917-89ac-9cc1e275b752 and its updates.",
+    "Check the stated invariant-flag and block-semi-linear hypotheses and how they are represented in the input.",
+    "Audit the construction of the small permutation quotient, kernel generators, diagonal conjugates, and unitriangular normal closure.",
+    "Verify the polynomial-size averaging list and the spectral-gap / derandomized-squaring argument.",
+    "Audit all polynomial bounds, including residue-ring arithmetic for composite q-1, matrix word lengths, and dependence on 1/epsilon.",
+    "Separate the exact-majority tractable result from the strict-majority width-three hardness claim; verify that the thresholds and promise models are not conflated."
+  ],
+  "deliverables": [
+    "An explicit theorem statement with the exact input representation and promises.",
+    "Proof audit of each group-theoretic construction and complexity bound.",
+    "Independent implementation or small exhaustive checks for the finite algebraic steps, clearly labeled as finite evidence.",
+    "Identification of any missing uniformity, hidden exponential factor, or unsupported subroutine.",
+    "A precise statement of what this restricted result says and does not say about SAT or P vs NP."
+  ],
+  "acceptance_criteria": [
+    "All algorithms must run in time polynomial in the encoded input size and 1/epsilon under the stated hypotheses.",
+    "Distinguish abstract existence of a generating set from an efficiently constructible list.",
+    "Check ring operations over composite moduli rather than assuming field Gaussian elimination.",
+    "Do not extrapolate the restricted affine group result to unrestricted SAT or general affine generators.",
+    "Report counterexamples and exact proof gaps rather than smoothing over them."
+  ],
+  "dependencies": [
+    "FOUNDATIONS-001",
+    "COMPLEXITY-001"
+  ],
+  "source_references": [
+    "https://pequalsnp.ai/research/31d8a318-4875-4917-89ac-9cc1e275b752"
+  ],
+  "verification": {
+    "independent_review_required": true,
+    "lean_required": false
+  }
+}
