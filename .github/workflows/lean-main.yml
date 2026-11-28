@@ -1,11 +1,26 @@
-name: Lean formalization (trusted branch only)
+name: Lean formalization
+
 on:
   push:
     branches: [main]
-    paths: ["formal/**", "lean-toolchain", "lakefile.toml"]
+    paths:
+      - "formal/**"
+      - "lean-toolchain"
+      - "lakefile.toml"
+      - "lake-manifest.json"
+      - ".github/workflows/lean-main.yml"
+  pull_request:
+    paths:
+      - "formal/**"
+      - "lean-toolchain"
+      - "lakefile.toml"
+      - "lake-manifest.json"
+      - ".github/workflows/lean-main.yml"
   workflow_dispatch:
+
 permissions:
   contents: read
+
 jobs:
   lean-build:
     runs-on: ubuntu-latest
